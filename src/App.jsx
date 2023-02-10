@@ -189,7 +189,7 @@ export default function App() {
                     </div>
                     <div className="row">
                         <div className="iteraciones">
-                            {dataStore.dijkstra.pathComplete.map((element, key) => (
+                            {dataStore?.dijkstra?.pathComplete.map((element, key) => (
                                 <div className="iteracion" key={key}>
                                     <span className='label'>Iteracion {key + 1}</span>
                                     <span>Caminos Disponibles</span>
