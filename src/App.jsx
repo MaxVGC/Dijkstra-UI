@@ -48,12 +48,12 @@ export default function App() {
         })
         dispatch({ type: 'SET_CONEXIONS', payload: conexions });
         var dijkstra = new Dijkstra(getAllNodesConnected(), dataStore.from, dataStore.to).getMostShortPath();
+        console.log("dikstra: ", dijkstra)
         dispatch({ type: 'SET_DIJKSTRA', payload: dijkstra });
         executeAnimation(dijkstra);
     }
 
     function executeAnimation(dijkstra) {
-        console.log(dijkstra)
         var path = dijkstra.pathComplete;
         var path2 = dijkstra.pathShort;
         path2.reverse();
@@ -114,15 +114,15 @@ export default function App() {
         var distance = 0;
         var path = dataStore.dijkstra.pathShort;
         for (var i = 0; i < path.length - 1; i++) {
-            distance += getDistanceBetweenNodes(path[i], path[i + 1]);
+            distance += parseFloat(getDistanceBetweenNodes(path[i], path[i + 1]));
         }
         return distance;
     }
 
-    function getConexionsWithValue(id){
+    function getConexionsWithValue(id) {
         var conexions = [];
         dataStore.conexions.map((element) => {
-            if(element.nodes[0].id == id || element.nodes[1].id == id){
+            if (element.nodes[0].id == id || element.nodes[1].id == id) {
                 conexions.push(element);
             }
         })
@@ -166,15 +166,15 @@ export default function App() {
                     <div className="row">
                         <div className="colors">
                             <div className="color">
-                                <div className="color1" style={{backgroundColor:"#661522"}}></div>
+                                <div className="color1" style={{ backgroundColor: "#661522" }}></div>
                                 <span>Ruta evaluada</span>
                             </div>
                             <div className="color">
-                                <div className="color1" style={{backgroundColor:"#152f66"}}></div>
+                                <div className="color1" style={{ backgroundColor: "#152f66" }}></div>
                                 <span>Ruta pivote</span>
                             </div>
                             <div className="color">
-                                <div className="color1" style={{backgroundColor:"#375a14"}}></div>
+                                <div className="color1" style={{ backgroundColor: "#375a14" }}></div>
                                 <span>Ruta mas corta</span>
                             </div>
                         </div>
@@ -194,7 +194,7 @@ export default function App() {
                                     <span className='label'>Iteracion {key + 1}</span>
                                     <span>Caminos Disponibles</span>
                                     {getConexionsWithValue(element.to.id).map((element2, key) => (
-                                        <span className='routes'>Hacia {element.to.id==element2.nodes[0].id?(element2.nodes[1].id+" = "+element2.value):(element2.nodes[0].id+" = "+element2.value)}</span>
+                                        <span className='routes'>Hacia {element.to.id == element2.nodes[0].id ? (element2.nodes[1].id + " = " + element2.value) : (element2.nodes[0].id + " = " + element2.value)}</span>
                                     ))}
                                     <span className='number'>Camino elegido {element.to.id} - {element.from.id}</span>
                                 </div>

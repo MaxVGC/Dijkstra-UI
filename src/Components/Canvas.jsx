@@ -120,7 +120,7 @@ export default function Canvas({ eleContainer }) {
         if (event.key === 'Enter') {
             const value = event.target.value;
             if (value != null && value != "" && value > 0) {
-                dispatch({ type: 'UPDATE_CONEXION', payload: {conexion:edit.conexion,value:value} });
+                dispatch({ type: 'UPDATE_CONEXION', payload: {conexion:edit.conexion,value:parseFloat(value)} });
                 setEdit({
                     conexion: null
                 })
